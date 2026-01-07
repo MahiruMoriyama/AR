@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>彼女作成計画の第一歩 - My Diary</title>
+    <link rel="stylesheet" href="blog-css.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📔 My Diary</h1>
+            <p>日々の記録</p>
+            
+            <div class="search-container">
+                <form class="search-form" id="search-form">
+                    <input 
+                        type="text" 
+                        class="search-input" 
+                        id="search-input" 
+                        placeholder="キーワードで検索... (2語まで対応)" 
+                        autocomplete="off"
+                    />
+                    <button type="submit" class="search-button">🔍 検索</button>
+                </form>
+                <div class="search-message" id="search-message"></div>
+            </div>
+        </header>
+
+        <!-- パンくずリスト -->
+        <nav class="breadcrumb">
+            <a href="top.html">トップ</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">彼女作成計画の第一歩</span>
+        </nav>
+
+        <!-- 検索結果表示エリア（ここに挿入されます） -->
+        <div id="search-result-placeholder"></div>
+
+        <!-- 記事本文 -->
+        <article class="article-detail">
+            <div class="entry-date-header">
+                <div class="date-box">
+                    <div class="date-day">8月</div>
+                </div>
+                <div>
+                    <div class="date-info-group">
+                        <div class="date-label">最終更新:</div>
+                        <div class="date-time">15日前</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="entry-content">
+                <h1 class="article-title">彼女作成計画の第一歩</h1>
+                
+                <div class="article-body">
+                    <p>
+                    ジムと美容院に行ってきた。<br>
+                    予約した日から少し緊張していたけど、終わってみると意外とあっさりしていた。
+                    </p>
+                    <p>
+                    ジムでは久しぶりに体を動かして、思った以上に体力が落ちていることを実感したし、美容院では「こんな感じで」とほぼ丸投げしたら、見慣れない自分が鏡の中にいた。悪くない。<br>
+                    劇的に何かが変わったわけじゃないけど、ちゃんと行動したという事実だけで少し気分がいい。<br>
+                    たぶんこういう小さい積み重ねが、何かを変えていくんだと思う。<br>
+
+                    <img src="ジムでの写真.png" class="header-image">
+                    <img src="美容院での写真.png" class="header-image">
+                    </p>
+
+                </div>
+            </div>
+        </article>
+        <!-- トップに戻るボタン -->
+        <div class="back-to-top">
+            <a href="top.html" class="back-button">← トップページに戻る</a>
+        </div>
+
+    </div>
+
+    <script src="blog-js.js"></script>
+</body>
+</html>

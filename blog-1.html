@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>恋愛のすすめ - My Diary</title>
+    <link rel="stylesheet" href="blog-css.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📔 My Diary</h1>
+            <p>日々の記録</p>
+            
+            <div class="search-container">
+                <form class="search-form" id="search-form">
+                    <input 
+                        type="text" 
+                        class="search-input" 
+                        id="search-input" 
+                        placeholder="キーワードで検索... (2語まで対応)" 
+                        autocomplete="off"
+                    />
+                    <button type="submit" class="search-button">🔍 検索</button>
+                </form>
+                <div class="search-message" id="search-message"></div>
+            </div>
+        </header>
+
+        <!-- パンくずリスト -->
+        <nav class="breadcrumb">
+            <a href="top.html">トップ</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">恋愛のすすめ</span>
+        </nav>
+
+        <!-- 検索結果表示エリア（ここに挿入されます） -->
+        <div id="search-result-placeholder"></div>
+
+        <!-- 記事本文 -->
+        <article class="article-detail">
+            <div class="entry-date-header">
+                <div class="date-box">
+                    <div class="date-day">6月</div>
+                </div>
+                <div>
+                    <div class="date-info-group">
+                        <div class="date-label">最終更新:</div>
+                        <div class="date-time">15日前</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="entry-content">
+                <h1 class="article-title">恋愛のすすめ</h1>
+                
+                <div class="article-body">
+                    <p>
+                    今日、友達に「恋愛でもしてみたら？」って言われた。<br>
+                    いや、別にしてないわけじゃないんだけどな、と思った。<br>
+                    本当は頭の片隅ではずっと考えてはいる。<br>
+                    たぶん友達の言う恋愛しろって、彼女をつ<span style="font-family: 'Hiragino Mincho ProN', 'MS PMincho', serif;">く</span>れってことなんだろう。<br>
+                    でも正直なところ、ど<span style="font-family: 'Hiragino Mincho ProN', 'MS PMincho', serif;">う</span>すればいいかわからない。<br>
+                    俺的に<span style="font-family: 'Hiragino Mincho ProN', 'MS PMincho', serif;">は</span>別にこのままでもいいんだけど、彼女すらつ<span style="font-family: 'Hiragino Mincho ProN', 'MS PMincho', serif;">く</span>れない奴だとは思われたくない。<br>
+                    とはいえ、問題がある。<br>
+                    俺、今まで容姿<span style="font-family: 'Hiragino Mincho ProN', 'MS PMincho', serif;">に気を</span>使ってこなかった。<br>
+                    服も髪も「まあいいか」で済ませてきたし、そもそも心底興味がない。<br>
+                    もちろん彼女ができたことも一度もない。<br>
+                    だから、いざ「彼女作れ」と言われても困る。<br>
+                    何から始めればいいのかもわからないし、そもそも自分が女と歩く姿が全然想像できない。<br>
+                    彼女って、そんなに簡単に「よし、<span style="font-family: 'Hiragino Mincho ProN', 'MS PMincho', serif;">つ</span>くるぞ」って言って作れるものなんだろうか。<br>
+                    とりあえず今日は、鏡を見て「俺ってどんな顔だっ<span style="font-family: 'Hiragino Mincho ProN', 'MS PMincho', serif;">け</span>」と考えるとこ<span style="font-family: 'Hiragino Mincho ProN', 'MS PMincho', serif;">ろ</span>から始めてみようと思う。
+                    <img src="LINE.png" class="header-image">
+                    </p>
+            </div>
+        </article>
+        <!-- トップに戻るボタン -->
+        <div class="back-to-top">
+            <a href="top.html" class="back-button">← トップページに戻る</a>
+        </div>
+
+    </div>
+
+    <script src="blog-js.js"></script>
+</body>
+</html>

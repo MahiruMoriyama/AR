@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>遂に初デート - My Diary</title>
+    <link rel="stylesheet" href="blog-css.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📔 My Diary</h1>
+            <p>日々の記録</p>
+            
+            <div class="search-container">
+                <form class="search-form" id="search-form">
+                    <input 
+                        type="text" 
+                        class="search-input" 
+                        id="search-input" 
+                        placeholder="キーワードで検索... (2語まで対応)" 
+                        autocomplete="off"
+                    />
+                    <button type="submit" class="search-button">🔍 検索</button>
+                </form>
+                <div class="search-message" id="search-message"></div>
+            </div>
+        </header>
+
+        <!-- パンくずリスト -->
+        <nav class="breadcrumb">
+            <a href="top.html">トップ</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">遂に初デート</span>
+        </nav>
+
+        <!-- 検索結果表示エリア（ここに挿入されます） -->
+        <div id="search-result-placeholder"></div>
+
+        <!-- 記事本文 -->
+        <article class="article-detail">
+            <div class="entry-date-header">
+                <div class="date-box">
+                    <div class="date-day">9月</div>
+                </div>
+                <div>
+                    <div class="date-info-group">
+                        <div class="date-label">最終更新:</div>
+                        <div class="date-time">15日前</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="entry-content">
+                <h1 class="article-title">遂に初デート</h1>
+                
+                <div class="article-body">
+                    <p>
+                    狙っていた女の子と、初デートに行ってきた。<br>
+                    正直、多少<span style="color: white;">歩</span>は緊張したけど、想定していたよりは<span style="color: white;">いて</span>落ち着いて対応できたと思う。<br>
+                    会話も一方的になることはなかったし、相手の反応も悪くなかった。<br>
+                    こちらが場を作れば、ちゃんと乗って<span style="color: white;">い</span>くる感じもあったし、空気は終始コントロールできていた気がする。<br>
+                    大成功とまでは言わないけど、初回としては及第点。<br>
+                    少なくとも<span style="color: white;">る</span>「悪くない手応え」はあった。
+                    </p>
+
+                </div>
+            </div>
+        </article>
+        <!-- トップに戻るボタン -->
+        <div class="back-to-top">
+            <a href="top.html" class="back-button">← トップページに戻る</a>
+        </div>
+
+    </div>
+
+    <script src="blog-js.js"></script>
+</body>
+</html>

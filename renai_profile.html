@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>戦略的プロファイリングシート - APPENDIX</title>
+    <!-- Google Fonts: Noto Serif JP (明朝体) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --paper-color: #ffffff;
+            --bg-color: #e0e0e0;
+            --ink-color: #2b2b2b;
+            --accent-color: #8a3b3b; /* 落ち着いた赤 */
+            --sub-color: #595959;
+            --font-main: 'Noto Serif JP', serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 40px 20px;
+            font-family: var(--font-main);
+            color: var(--ink-color);
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* A4サイズ風のシート */
+        .sheet-wrapper {
+            width: 100%;
+            max-width: 210mm; /* A4幅 */
+            min-height: 297mm; /* A4高さ */
+            background-color: var(--paper-color);
+            padding: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            position: relative;
+            /* 紙の質感ノイズ */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+        }
+
+        /* 穴あきパンチ風装飾 */
+        .sheet-wrapper::before {
+            content: "";
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            background: var(--bg-color);
+            border-radius: 50%;
+            box-shadow: 
+                0 -100px 0 var(--bg-color),
+                0 100px 0 var(--bg-color);
+        }
+
+        /* ヘッダー */
+        .sheet-header {
+            border-bottom: 3px double var(--ink-color);
+            padding-bottom: 15px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-left: 20px; /* パンチ穴回避 */
+        }
+        .sheet-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: var(--ink-color);
+        }
+        .sheet-id {
+            font-family: monospace;
+            color: var(--accent-color);
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-align: right;
+        }
+        .sheet-sub-id {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--sub-color);
+        }
+        
+        .sheet-body {
+            padding-left: 20px; /* パンチ穴回避 */
+        }
+
+        /* セクションラベル */
+        .section-label {
+            background: var(--ink-color);
+            color: #fff;
+            padding: 4px 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 20px;
+            letter-spacing: 0.15em;
+        }
+
+        /* フォーム要素 */
+        .form-group {
+            margin-bottom: 30px;
+        }
+        .form-label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+            color: var(--sub-color);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        /* 記入例のスタイル */
+        .example-text {
+            font-weight: normal;
+            color: #999;
+            font-size: 0.85em;
+            margin-left: 8px;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        .form-input {
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            background: #fafafa;
+            padding: 10px 12px;
+            font-family: var(--font-main);
+            font-size: 1.1rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+        .form-input:focus {
+            background: #fff;
+            border-bottom-color: var(--accent-color);
+        }
+        
+        .form-textarea {
+            width: 100%;
+            border: 1px solid #ccc;
+            background: #fafafa;
+            padding: 15px;
+            font-family: var(--font-main);
+            font-size: 1rem;
+            min-height: 120px;
+            line-height: 1.8;
+            resize: none;
+        }
+        .form-textarea:focus {
+            background: #fff;
+            border-color: var(--accent-color);
+            outline: none;
+        }
+
+        /* グリッドレイアウト */
+        .grid-row {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .col-half {
+            flex: 1;
+            min-width: 200px;
+        }
+        .col-third {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        /* チェックボックス */
+        .check-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+            align-items: center;
+        }
+        .check-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        .check-box {
+            width: 18px; 
+            height: 18px; 
+            border: 1px solid #999; 
+            margin-right: 8px;
+            background: #fff;
+        }
+        
+        /* スタンプ */
+        .stamp-box {
+            position: absolute;
+            bottom: 60px;
+            right: 60px;
+            width: 100px;
+            height: 100px;
+            border: 3px double #ccc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ccc;
+            font-size: 0.8rem;
+            font-weight: bold;
+            transform: rotate(-15deg);
+            opacity: 0.8;
+        }
+
+        /* 区切り線 */
+        .divider {
+            margin: 35px 0;
+            border-top: 1px dashed #ccc;
+        }
+
+        /* コピーライト */
+        .sheet-footer {
+            margin-top: 60px;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #aaa;
+        }
+
+        /* 印刷用設定 */
+        @media print {
+            body { 
+                background: none; 
+                padding: 0;
+            }
+            .sheet-wrapper {
+                box-shadow: none;
+                margin: 0;
+                width: 100%;
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sheet-wrapper">
+        <div class="sheet-header">
+            <div class="sheet-title">APPENDIX: TACTICAL PROFILE SHEET</div>
+            <div class="sheet-id">
+                FORM-L0V3-STRATEGY<br>
+                <span class="sheet-sub-id">Rev. 2.1 / Paradox Publishing</span>
+            </div>
+        </div>
+        
+        <div class="sheet-body">
+            <!-- セクション1 -->
+            <div class="section-label">01. TARGET IDENTIFICATION</div>
+            
+            <div class="form-group">
+                <label class="form-label" style="color: var(--accent-color);">
+                    結ばれたい相手の名前 (TARGET NAME) *
+                    <span class="example-text">例：氏名を記入（未確定の場合は仮称）</span>
+                </label>
+                <input type="text" class="form-input">
+            </div>
+
+            <div class="grid-row">
+                <div class="col-half">
+                    <label class="form-label">
+                        推定市場価値 (Est. MARKET VALUE)
+                        <span class="example-text">例：Aクラス上位 / 社内人気No.1</span>
+                    </label>
+                    <input type="text" class="form-input">
+                </div>
+                <div class="col-half">
+                    <label class="form-label">攻略難易度 (DIFFICULTY)</label>
+                    <div class="check-group">
+                        <label class="check-item"><div class="check-box"></div> Class S</label>
+                        <label class="check-item"><div class="check-box"></div> Class A</label>
+                        <label class="check-item"><div class="check-box"></div> Class B</label>
+                        <label class="check-item"><div class="check-box"></div> Class C</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">
+                    ターゲットの弱点 / 需要 (WEAKNESS / DEMAND)
+                    <span class="example-text">例：仕事のストレス、承認欲求、限定品、犬</span>
+                </label>
+                <input type="text" class="form-input">
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- セクション2 -->
+            <div class="section-label">02. SELF ANALYSIS</div>
+            <p style="font-size: 0.8rem; color: #666; margin-top: -10px; margin-bottom: 20px;">
+                ※ 客観的数値（0-100）を記入すること。希望的観測は排除せよ。
+            </p>
+            <div class="grid-row">
+                <div class="col-third">
+                    <label class="form-label">
+                        ビジュアル資本
+                        <span class="example-text">例：75</span>
+                    </label>
+                    <input type="number" class="form-input">
+                </div>
+                <div class="col-third">
+                    <label class="form-label">
+                        経済的資本
+                        <span class="example-text">例：60</span>
+                    </label>
+                    <input type="number" class="form-input">
+                </div>
+                <div class="col-third">
+                    <label class="form-label">
+                        会話・共感資本
+                        <span class="example-text">例：85</span>
+                    </label>
+                    <input type="number" class="form-input">
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- セクション3 -->
+            <div class="section-label">03. STRATEGIC OBJECTIVE</div>
+            <div class="grid-row">
+                <div class="col-half">
+                    <label class="form-label">
+                        作戦完了期限 (DEADLINE)
+                        <span class="example-text">例：202X / 12 / 24</span>
+                    </label>
+                    <input type="text" class="form-input">
+                </div>
+                <div class="col-half">
+                    <label class="form-label">
+                        投入可能予算 (BUDGET)
+                        <span class="example-text">例：¥50,000</span>
+                    </label>
+                    <input type="text" class="form-input">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">
+                    アクションプラン (ACTION PLAN)
+                    <br><span class="example-text" style="margin-left: 0;">例：具体的な接触計画、使用するペルソナ、想定される障害等を記述せよ。</span>
+                </label>
+                <textarea class="form-textarea"></textarea>
+            </div>
+
+            <div class="stamp-box">
+                CONFIDENTIAL
+            </div>
+
+            <div class="sheet-footer">
+                &copy; 202X Paradox Publishing. All Rights Reserved. <br>
+                Authorized Personnel Only.
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

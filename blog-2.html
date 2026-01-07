@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>恋愛マニュアルを読んだ - My Diary</title>
+    <link rel="stylesheet" href="blog-css.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📔 My Diary</h1>
+            <p>日々の記録</p>
+            
+            <div class="search-container">
+                <form class="search-form" id="search-form">
+                    <input 
+                        type="text" 
+                        class="search-input" 
+                        id="search-input" 
+                        placeholder="キーワードで検索... (2語まで対応)" 
+                        autocomplete="off"
+                    />
+                    <button type="submit" class="search-button">🔍 検索</button>
+                </form>
+                <div class="search-message" id="search-message"></div>
+            </div>
+        </header>
+
+        <!-- パンくずリスト -->
+        <nav class="breadcrumb">
+            <a href="top.html">トップ</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">恋愛マニュアルを読んだ</span>
+        </nav>
+
+        <!-- 検索結果表示エリア（ここに挿入されます） -->
+        <div id="search-result-placeholder"></div>
+
+        <!-- 記事本文 -->
+        <article class="article-detail">
+            <div class="entry-date-header">
+                <div class="date-box">
+                    <div class="date-day">7月</div>
+                </div>
+                <div>
+                    <div class="date-info-group">
+                        <div class="date-label">最終更新:</div>
+                        <div class="date-time">15日前</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="entry-content">
+                <h1 class="article-title">恋愛マニュアルを読んだ</h1>
+                
+                <div class="article-body">
+                    <p>
+                    最近、恋愛マニュアルの「生存戦略としての恋愛完全攻略マニュアル」を読んだ。<br>
+                    正直、めちゃくちゃ胡散臭い内容だけど意外と納得感があり面白い内容だった。<br>
+                    中でも印象に残ったのが、<br>
+                    「恋を盛り上げるために、あえて障害を作れ」<br>
+                    という一文。<br>
+                    <p>
+                    なるほどとは思ったけど、そもそも盛り上げる以前に、何も始まっていない現実に気づいて、今日のところは静かに本を閉じた。<br>
+                    ただ、いつでも読み返せるように本はこのサイトにあげておこうと思う。<br>
+                    </p>
+                    </p>
+
+                </div>
+            </div>
+        </article>
+        <!-- トップに戻るボタン -->
+        <div class="back-to-top">
+            <a href="top.html" class="back-button">← トップページに戻る</a>
+        </div>
+
+    </div>
+
+    <script src="blog-js.js"></script>
+</body>
+</html>

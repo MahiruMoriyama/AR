@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生存戦略としての恋愛：完全攻略マニュアル</title>
+    <!-- Google Fonts: Noto Serif JP (明朝体) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --paper-color: #fdfbf7;
+            --ink-color: #2b2b2b;
+            --accent-color: #8a3b3b; /* 落ち着いた赤 */
+            --sub-color: #595959;
+            --font-main: 'Noto Serif JP', serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            /* 縦書き設定 */
+            writing-mode: vertical-rl;
+            text-orientation: mixed; /* 英数字は90度回転 */
+            height: 100%;
+            overflow-y: hidden; /* 縦スクロール禁止 */
+            overflow-x: auto;   /* 横スクロール許可 */
+        }
+
+        body {
+            background-color: #e0e0e0;
+            margin: 0;
+            padding: 20px 0; /* 上下の余白を少し減らす */
+            height: 100%;
+            font-family: var(--font-main);
+            color: var(--ink-color);
+            line-height: 2.0;
+            font-feature-settings: "palt";
+        }
+
+        /* 本のコンテナ */
+        .book-wrapper {
+            /* 縦書きなので高さで制限し、横に伸びる */
+            height: 95vh; /* 高さを増やして一行の文字数を確保 */
+            min-width: 100vw; /* 画面幅以上にはなる */
+            width: max-content; /* 内容に合わせて幅を確保 */
+            
+            margin: auto 40px; /* 上下中央、左右余白 */
+            padding: 50px 100px; /* 上下の余白を80px→50pxに削減して行長を確保 */
+            
+            background-color: var(--paper-color);
+            box-shadow: 10px 0 30px rgba(0,0,0,0.15), 
+                        inset 0 0 40px rgba(0,0,0,0.02);
+            position: relative;
+            
+            /* カラム分割のような挙動を防ぐ */
+            display: block; 
+        }
+
+        /* 紙のテクスチャ */
+        .book-wrapper::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .content-inner {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            /* コンテンツが横に並ぶように */
+            column-width: 85vh; /* 擬似的にカラムを切って横スクロールさせる場合もあるが今回はストレートに並べる */
+        }
+
+        /* タイポグラフィ */
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            margin-block-start: 0;
+        }
+
+        /* 縦中横（数字などを縦向きにする） */
+        .tcy {
+            text-combine-upright: all;
+        }
+
+        /* 表紙エリア */
+        .cover-page {
+            text-align: center;
+            /* 縦書きでの上下マージン = 物理的な左右マージン */
+            margin-left: 80px; 
+            padding-left: 40px;
+            border-left: 1px solid #ddd; /* 縦書きの下線は左線になる */
+            height: 100%;
+            display: inline-block;
+            vertical-align: top;
+            
+            /* フレックスで中央揃え（縦書きなので主軸が縦） */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cover-title {
+            font-size: 3rem;
+            margin-left: 20px;
+            letter-spacing: 0.1em;
+            color: #000;
+            white-space: nowrap; /* タイトル改行禁止 */
+        }
+
+        .cover-subtitle {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            margin-left: 40px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+        }
+
+        .cover-author {
+            font-size: 1rem;
+            color: var(--sub-color);
+            margin-right: 60px; /* 物理的な上 */
+        }
+
+        /* セクション（章ごとの塊） */
+        section {
+            display: inline-block;
+            vertical-align: top;
+            margin-right: 60px; /* 次のセクションとの間隔 */
+            height: 100%;
+        }
+
+        /* 章扉 */
+        .chapter-header {
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            
+            height: 100%;
+            padding: 0 30px; /* 左右の余白も少し調整 */
+            border-left: 2px solid var(--ink-color);
+            margin: 0 60px;
+        }
+
+        .chapter-number {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-left: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            text-orientation: sideways; /* 英語は寝かせる */
+        }
+
+        .chapter-title {
+            font-size: 1.75rem; /* 少しサイズダウンして一行に入りやすく */
+            margin: 0;
+            line-height: 1.3;
+            white-space: nowrap; /* 章タイトル改行禁止 */
+        }
+
+        /* 見出し */
+        h3 {
+            font-size: 1.4rem; /* 少し調整 */
+            /* 縦書きの見出し装飾：上に線 */
+            border-top: 4px solid var(--accent-color);
+            padding-top: 15px;
+            margin-right: 50px; /* 前の行との間隔 */
+            margin-left: 30px; /* 次の行との間隔 */
+            line-height: 1.4;
+            white-space: nowrap; /* 見出し改行禁止 */
+        }
+
+        h4 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-right: 40px;
+            margin-left: 20px;
+            color: var(--sub-color);
+            border-left: 1px dashed #ccc; /* 縦書きの下線 */
+            padding-left: 5px;
+            display: inline-block;
+        }
+
+        /* 本文 */
+        p {
+            margin-left: 1.8em; /* 段落の改行幅 */
+            text-align: justify;
+        }
+
+        /* 引用 */
+        blockquote {
+            background-color: #f0ece6;
+            margin: 0 40px;
+            padding: 30px 20px;
+            position: relative;
+            font-style: italic;
+            color: #444;
+            display: inline-block;
+        }
+        
+        blockquote::before {
+            content: "“";
+            font-size: 3rem;
+            position: absolute;
+            right: 10px; /* 縦書きの「上」 */
+            top: 10px;
+            color: rgba(0,0,0,0.1);
+            font-family: serif;
+            writing-mode: horizontal-tb; /* 引用符は正立させる */
+        }
+
+        .point-box {
+            border: 1px solid var(--accent-color);
+            padding: 25px 20px;
+            margin: 0 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .point-label {
+            position: absolute;
+            right: -12px; /* 縦書きの「上」 */
+            top: 20px;
+            background: var(--paper-color);
+            padding: 5px 0;
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 0.9rem;
+            writing-mode: vertical-rl;
+        }
+
+        .warning-box {
+            background-color: #fff0f0;
+            border-top: 4px solid #d32f2f; /* 縦書きの左線アクセント */
+            padding: 20px 25px;
+            margin: 0 40px;
+            font-size: 0.95rem;
+            display: inline-block;
+        }
+
+        /* リスト */
+        ul, ol {
+            padding-top: 20px; /* 縦書きのインデント */
+            margin-left: 40px;
+        }
+        li {
+            margin-left: 10px;
+        }
+        
+        strong {
+            /* 縦書きのマーカー線は右側（文字の右）に出るのが一般的だが、CSSのlinear-gradientは方向指定が必要 */
+            background: linear-gradient(to left, transparent 60%, rgba(138, 59, 59, 0.2) 60%);
+        }
+
+        /* 目次 */
+        .toc {
+            margin: 0 60px;
+            padding: 30px 40px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            display: inline-block;
+            vertical-align: top;
+            height: 90%; /* コンテナいっぱいに広げる */
+        }
+        .toc-title {
+            text-align: center;
+            font-size: 1.3rem;
+            margin-left: 20px;
+            letter-spacing: 0.3em;
+            text-orientation: sideways;
+        }
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column; /* 縦書きなので行が左へ増える */
+            flex-wrap: wrap; /* 高さが足りなければ次の列へ */
+            height: 92%;
+        }
+        .toc-item {
+            display: flex;
+            justify-content: space-between; /* 上下（縦書きの天地）に配置 */
+            margin-left: 15px;
+            border-left: 1px dotted #ccc; /* 縦書きの下線 */
+            padding-left: 5px;
+            width: 100%;
+        }
+        .toc-page {
+            margin-top: auto; /* 下寄せ（縦書きの左寄せ） */
+            font-feature-settings: "tnum";
+        }
+
+        /* ページ番号・区切り */
+        .page-break {
+            display: inline-block;
+            width: 1px;
+            height: 50%;
+            background: #eee;
+            margin: 0 50px;
+            vertical-align: middle;
+            position: relative;
+        }
+        .page-number-text {
+            position: absolute;
+            bottom: -30px; /* 縦書きの左 */
+            left: 50%;
+            transform: translateX(-50%);
+            color: #999;
+            font-size: 0.8rem;
+        }
+
+        /* 奥付 */
+        .colophon {
+            margin-right: 100px;
+            padding-right: 40px;
+            border-right: 1px solid #ccc; /* 縦書きの上線 */
+            text-align: left; /* 縦書きの下寄せ */
+            font-size: 0.8rem;
+            color: #777;
+            display: inline-block;
+            vertical-align: bottom;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="book-wrapper">
+        
+        <!-- 表紙 -->
+        <div class="cover-page">
+            <div class="cover-author">
+                著：Dr. アレクサンダー・ハートレス<br>
+                <span style="font-size: 0.8em;">(エセ恋愛工学研究所 所長)</span>
+            </div>
+            <div class="cover-title">生存戦略としての恋愛<br>完全攻略マニュアル</div>
+            <div class="cover-subtitle">ホルモンと確率論の狭間で勝つための<span class="tcy">50</span>のメソッド</div>
+        </div>
+
+        <!-- はじめに -->
+        <section>
+            <h3>はじめに：戦場へようこそ</h3>
+            <p>
+                まず、この本を手に取ったあなたに残念なお知らせがある。「運命の人は、いつか自然に現れる」――それはディズニーとロマンティック・コメディが植え付けた、プロポーズのダイヤ指輪と双璧をなす人類史上最大のプロパガンダだ。
+            </p>
+            <p>
+                現実は違う。恋愛とは、需要と供給のバランスが崩壊した市場における、<strong>高度な心理戦</strong>であり、外交交渉だ。
+                本書は「愛」という曖昧な概念を捨て、いかにして「パートナー」というリソースを獲得し、維持するかを論理的に解説するものである。
+            </p>
+            <p style="margin-right: 30px; font-weight: bold; letter-spacing: 0.1em;">
+                感情は捨てろ。データを信じろ。
+            </p>
+        </section>
+
+        <!-- 目次 (更新) -->
+        <div class="toc">
+            <div class="toc-title">CONTENTS</div>
+            <ul class="toc-list">
+                <li class="toc-item"><span>市場調査と自己ブランディング</span><span class="toc-page">一二</span></li>
+                <li class="toc-item"><span>接触プロトコル（デジタル編）</span><span class="toc-page">二八</span></li>
+                <li class="toc-item"><span>実戦フェーズ（デートの兵法）</span><span class="toc-page">四五</span></li>
+                <li class="toc-item"><span>錯覚の魔術（心理学）</span><span class="toc-page">六七</span></li>
+                <li class="toc-item"><span>障害の設計図（ロミオとジュリエット）</span><span class="toc-page">七五</span></li>
+                <li class="toc-item"><span>契約更新と損切り</span><span class="toc-page">八二</span></li>
+            </ul>
+        </div>
+
+        <!-- 第1章 -->
+        <div class="chapter-header">
+            <span class="chapter-number">CHAPTER <span class="tcy">01</span></span>
+            <h2 class="chapter-title">市場調査と自己ブランディング</h2>
+        </div>
+
+        <section>
+            <h4>§<span class="tcy">1</span>-<span class="tcy">1</span> あなたの「市場価値（Market Value）」を算出する</h4>
+            <p>
+                鏡を見てほしい。そこに映っているのは、あなたという商品だ。
+                恋愛市場において、商品は以下の<span class="tcy">3</span>要素で評価される。
+            </p>
+            <ol>
+                <li><strong>ビジュアル資本</strong>（顔面偏差値、スタイル、清潔感）</li>
+                <li><strong>ステータス資本</strong>（社会的地位、経済力、将来性）</li>
+                <li><strong>コミュニケーション資本</strong>（ユーモア、共感力、ミステリアスさ）</li>
+            </ol>
+            <p>
+                重要なのは「総合点」ではない。「ターゲット層が何を求めているか」だ。
+                ターゲットが「安定」を求めているのに、「冒険」を売り込んでも成約には至らない。これはマーケティングの基本だ。
+            </p>
+            
+            <div class="point-box">
+                <span class="point-label">Strategist's Point</span>
+                「ありのままの自分」を受け入れてくれるのは、あなたの親とAIだけだ。まずは「求められる自分」をパッケージングせよ。
+            </div>
+        </section>
+
+        <div class="page-break"><span class="page-number-text">12</span></div>
+
+        <!-- 第2章 -->
+        <div class="chapter-header">
+            <span class="chapter-number">CHAPTER <span class="tcy">02</span></span>
+            <h2 class="chapter-title">接触プロトコル</h2>
+            <div style="font-size: 0.9rem; margin-right: 10px; color: var(--sub-color);">デジタル・コミュニケーション編</div>
+        </div>
+
+        <section>
+            <h4>§<span class="tcy">2</span>-<span class="tcy">3</span> 既読スルーの黄金比</h4>
+            <p>
+                LINEやメッセージアプリにおける「返信速度」は、あなたの暇さを露呈するパラメータではない。それは「主導権」の譲渡合戦だ。
+            </p>
+            <ul>
+                <li><strong>即レス：</strong> 相手への服従、または必死さの表れ。「安い」と思われるリスクがある。</li>
+                <li><strong>半日放置：</strong> 「私は忙しい重要人物である」という演出。ただし、やりすぎると「興味がない」と誤認される。</li>
+            </ul>
+            <p>
+                推奨される黄金比は、<strong>「相手の返信時間の<span class="tcy">0.8</span>倍〜<span class="tcy">1.2</span>倍」</strong>のランダム変動だ。
+                この不規則性が、相手の脳内でドーパミンを分泌させる。「いつ返ってくるのか？」と思わせた時点で、あなたは相手の脳内メモリを占有している。
+            </p>
+
+            <div class="warning-box">
+                <strong>Warning:</strong> 深夜<span class="tcy">2</span>時以降の長文メッセージは「ポエム」と見なされる。送信ボタンを押す前に、その指を氷水に浸せ。
+            </div>
+        </section>
+
+        <div class="page-break"><span class="page-number-text">28</span></div>
+
+        <!-- 第3章 -->
+        <div class="chapter-header">
+            <span class="chapter-number">CHAPTER <span class="tcy">03</span></span>
+            <h2 class="chapter-title">実戦フェーズ</h2>
+            <div style="font-size: 0.9rem; margin-right: 10px; color: var(--sub-color);">デートの兵法</div>
+        </div>
+
+        <section>
+            <h4>§<span class="tcy">3</span>-<span class="tcy">2</span> レストラン選びの地政学</h4>
+            <p>
+                初デートの場所選びで、あなたのセンスと戦略眼が試される。
+                絶対に避けるべきは以下の<span class="tcy">3</span>箇所だ。
+            </p>
+            <ol>
+                <li><strong>静かすぎる高級フレンチ：</strong> 会話が途切れた瞬間、カトラリーの音が死刑宣告のように響く。</li>
+                <li><strong>うるさすぎる大衆居酒屋：</strong> 「え？なんだって？」と聞き返す顔は、決して魅力的ではない。</li>
+                <li><strong>実家：</strong> 論外だ。</li>
+            </ol>
+            <p>
+                理想は「L字型の席」がある店だ。対面席は面接のような緊張感を生むが、L字やカウンターは視線を逃がすことができる。
+                物理的な距離の近さは、心理的な距離の近さと錯覚させることができる。これを「パーソナルスペース侵略作戦」と呼ぶ。
+            </p>
+
+            <h4>§<span class="tcy">3</span>-<span class="tcy">5</span> 支払い時の「財布を出す演技」</h4>
+            <p>
+                現代において、割り勘か奢りかは重要ではない。重要なのは「儀式」だ。
+                会計時、支払われる側が財布を出そうとする動作（通称：お財布チラリズム）を見せるかどうか。
+                これは互いの民度を確認するリトマス試験紙である。
+            </p>
+            <p>
+                <strong>正解：</strong> 相手が伝票を持ったら、すぐに財布に手をかけ「あ、出しますよ」と（形だけでも）言う。<br>
+                <strong>不正解：</strong> トイレに逃げ込む。あるいは店の出口で空を見上げて天候を気にし始める。
+            </p>
+        </section>
+
+        <div class="page-break"><span class="page-number-text">45</span></div>
+
+        <!-- 第4章 -->
+        <div class="chapter-header">
+            <span class="chapter-number">CHAPTER <span class="tcy">04</span></span>
+            <h2 class="chapter-title">錯覚の魔術</h2>
+            <div style="font-size: 0.9rem; margin-right: 10px; color: var(--sub-color);">相手を沼らせる心理学</div>
+        </div>
+
+        <section>
+            <h4>§<span class="tcy">4</span>-<span class="tcy">1</span> ツァイガルニク効果の悪用</h4>
+            <p>
+                人は「完了したこと」よりも「未完了のこと」を強く記憶する。
+                デートの別れ際、「今日は楽しかった」で終わらせてはいけない。
+            </p>
+            <blockquote>
+                「そういえば、さっき言いかけた話なんだけど…やっぱりまた今度話すね」
+            </blockquote>
+            <p>
+                これでいい。相手は気になって眠れなくなる。
+                あなたのことを考えて眠れない夜、脳はこう誤認する。「私（俺）はこんなにあの人のことを考えている。つまり、私（俺）はあの人が好きなのだ」と。
+                これが認知的不協和の解消を利用した、強制的な好意のインストールだ。
+            </p>
+        </section>
+
+        <div class="page-break"><span class="page-number-text">67</span></div>
+
+        <!-- 第5章 (新規追加) -->
+        <div class="chapter-header">
+            <span class="chapter-number">CHAPTER <span class="tcy">05</span></span>
+            <h2 class="chapter-title">障害の設計図</h2>
+            <div style="font-size: 0.9rem; margin-right: 10px; color: var(--sub-color);">ロミオとジュリエット効果</div>
+        </div>
+
+        <section>
+            <h4>§<span class="tcy">5</span>-<span class="tcy">1</span> 意図的な「壁」の構築</h4>
+            <p>
+                「障害があるほど燃え上がる」――これは詩的な表現ではなく、単なる脳のバグだ。心理学ではロミオとジュリエット効果と呼ばれる。
+                人間は「手に入りにくいもの」に過剰な価値を感じる。順風満帆な恋愛は、脳にとって「低コストで入手した資産」であり、飽きられやすい。
+            </p>
+            <p>
+                したがって、障害がない場合は捏造せよ。
+                「今は仕事が忙しくて会えない」「親が厳しくて門限がある」「実は来年、留学するかもしれない（嘘でもいい）」
+                これらの「超えられそうな壁」が、相手の狩猟本能を刺激し、ドーパミンを過剰分泌させる。
+            </p>
+            
+            <div class="point-box">
+                <span class="point-label">Strategist's Point</span>
+                平和は愛の墓場だ。適度なストレスこそが、関係を維持する防腐剤となる。
+            </div>
+        </section>
+
+        <div class="page-break"><span class="page-number-text">75</span></div>
+
+        <!-- 第6章 (元第5章) -->
+        <div class="chapter-header">
+            <span class="chapter-number">CHAPTER <span class="tcy">06</span></span>
+            <h2 class="chapter-title">契約更新と損切り</h2>
+        </div>
+
+        <section>
+             <!-- 内容は元5章と同じ -->
+             <p>
+                交際とは、期間限定の契約にすぎない。
+                「ずっと一緒」という言葉は、契約書における定型文のようなもので、法的拘束力はない。
+                重要なのは、定期的に「契約更新」の審査を行うことだ。
+            </p>
+        </section>
+
+        <!-- あとがき -->
+        <section style="margin-right: 60px; padding-right: 50px; border-right: 1px solid #eee;">
+            <h3>あとがき：愛とは「バグ」である</h3>
+            <p>
+                ここまで戦略とテクニックを説いてきたが、最後に最大の矛盾を伝えなければならない。
+                本当に誰かに恋をした時、このマニュアルは役に立たない。
+            </p>
+            <p>
+                計算ができなくなり、即レスしてしまい、格好悪い姿を晒し、市場価値などどうでもよくなる。
+                その制御不能なシステムエラーこそが、人間が「愛」と呼ぶものの正体かもしれない。
+            </p>
+            <p>
+                しかし、もしそのエラーが発生しなかったなら――本書の第<span class="tcy">1</span>章に戻りたまえ。<br>
+                戦いは続くのだから。
+            </p>
+        </section>
+
+        <!-- 奥付 -->
+        <div class="colophon">
+            <p>
+                <strong>生存戦略としての恋愛：完全攻略マニュアル</strong><br>
+                202X年 <span class="tcy">4</span>月<span class="tcy">1</span>日 初版発行<br>
+                <br>
+                著者：Dr. アレクサンダー・ハートレス<br>
+                発行所：パラドックス出版<br>
+                <br>
+                &copy; 202X Paradox Publishing. All Rights Reserved.<br>
+                <span style="font-size: 0.7em; margin-left: 10px; display: inline-block;">本書の実践による破局、ブロ解、社会的地位の喪失について、著者は一切の責任を負いません。</span>
+            </p>
+        </div>
+
+    </div>
+
+</body>
+</html>
