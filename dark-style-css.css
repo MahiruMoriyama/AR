@@ -390,4 +390,10 @@ header p {
     .entry-title {
         font-size: 1.3rem;
     }
+    .header-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
 }

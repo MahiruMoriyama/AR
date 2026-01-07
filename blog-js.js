@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.body.style.opacity = '0';
                     
                     setTimeout(() => {
-                        window.location.href = 'dark-blog.html';
+                        window.location.href ='dark-top.html';
                     }, 500);
                 }, 500);
             } else {

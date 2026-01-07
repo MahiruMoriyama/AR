@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大好きなようすけくん - 観察記録</title>
+    <link rel="stylesheet" href="dark-style-css.css">
+    <link rel="stylesheet" href="dark-article-css.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>👁️ 観察記録</h1>
+            <p>あなたのすべてを知っている</p>
+            
+            <div class="search-container">
+                <form class="search-form" id="search-form">
+                    <input 
+                        type="text" 
+                        class="search-input" 
+                        id="search-input" 
+                        placeholder="あなたを探す... (2語まで対応)" 
+                        autocomplete="off"
+                    />
+                    <button type="submit" class="search-button">🔍 追跡</button>
+                </form>
+                <div class="search-message" id="search-message"></div>
+            </div>
+        </header>
+
+        <!-- パンくずリスト -->
+        <nav class="breadcrumb">
+            <a href="dark-blog.html">観察記録トップ</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">大好きなようすけくん</span>
+        </nav>
+
+        <!-- 検索結果表示エリア（ここに挿入されます） -->
+        <div id="search-result-placeholder"></div>
+
+        <!-- 記事本文 -->
+        <article class="article-detail">
+            <div class="entry-date-header">
+                <div class="date-box">
+                    <div class="date-day">よんほめ</div>
+                </div>
+                <div>
+                    <div class="date-info-group">
+                        <div class="date-label">投稿:</div>
+                        <div class="date-time">19日前</div>
+                    </div>
+                    <div class="date-info-group">
+                        <div class="date-label">最終更新:</div>
+                        <div class="date-time">15日前</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="entry-content">
+                <h1 class="article-title">大好きなようすけくん</h1>
+                
+                <div class="article-body">
+                    <p>
+                        加藤陽介の趣向を知るために、色々と調べていた。<br>
+                        どうやら元恋人の数は三人程度らしい……合格だ。多すぎず、少なすぎない。
+                    </p>
+                    <p>
+                        好きなタイプは長い黒髪。<br>
+                        ただし、これはあくまで「女」に対しての話だ。<br>
+                        今回の理解にはあまり役に立たない。
+                    </p>
+                    <p>
+                        SNSのアカウントも見つけた。@ykato199858220らしい。<br>
+                        彼の輪郭がさらにくっきり浮かび上がってきたぞ。
+                    </p>
+                    <p>
+                        これで、もっと陽介のことを理解できる。<br>
+                        理解が深まれば、距離は自然と縮まるはずだ。
+                        <img src="恋愛プロファイルシート2.png" class="header-image">
+                    </p>
+                </div>
+                
+            </div>
+        </article>
+
+        <!-- トップに戻るボタン -->
+        <div class="back-to-top">
+            <a href="dark-top.html" class="back-button">← トップに戻る</a>
+        </div>
+
+    </div>
+
+    <script src="blog-js.js"></script>
+</body>
+</html>
