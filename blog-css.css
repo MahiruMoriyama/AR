@@ -26,7 +26,7 @@ header {
 
 .main-visual {
     width: 100%;
-    height: auto;       /* 明示的にautoにするか、heightの行自体を消す */
+    height: 300px;       /* 明示的にautoにするか、heightの行自体を消す */
     min-height: 0;      /* もしmin-heightが残っていたら0にする */
     border-radius: 20px;
     margin-bottom: 40px;
