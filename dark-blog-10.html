@@ -6,77 +6,213 @@
     <title>待っていたよ - 観察記録</title>
     <link rel="stylesheet" href="dark-style-css.css">
     <link rel="stylesheet" href="dark-article-css.css">
+    
+    <style>
+        /* --- ポップアップ①（ホラー） --- */
+        #horror-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #000;
+            z-index: 99999;
+            overflow: hidden;
+        }
+
+        /* 砂嵐（ノイズ）の視覚エフェクト */
+        #horror-overlay::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/5/5a/Static_noise.gif');
+            opacity: 0.05; /* うっすら砂嵐が見える */
+            pointer-events: none;
+        }
+
+        .horror-text {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            color: #bc0000;
+            font-family: "MS 明朝", "Sawarabi Mincho", serif;
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            font-weight: bold;
+            letter-spacing: 0.8rem;
+            text-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+            animation: horror-shake 0.1s infinite;
+            white-space: nowrap;
+            z-index: 2;
+        }
+
+        @keyframes horror-shake {
+            0% { transform: translate(-50.5%, -50.5%); filter: contrast(1.5); }
+            50% { transform: translate(-49.5%, -49.2%); filter: contrast(2); }
+            100% { transform: translate(-50%, -50%); }
+        }
+
+        .horror-hand {
+            position: absolute;
+            bottom: -250px; /* 最初はもっと下に隠す */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 700px;
+            fill: #050505;
+            opacity: 0;
+            z-index: 1;
+        }
+
+        /* 手がガバッと出てくるアニメーション */
+        .hand-attack {
+            animation: hand-move 4.5s forwards;
+        }
+
+        @keyframes hand-move {
+            0% { bottom: -250px; opacity: 0; transform: translateX(-50%) scale(0.8); }
+            20% { bottom: -50px; opacity: 1; transform: translateX(-50%) scale(1.2); }
+            80% { bottom: 0px; opacity: 1; transform: translateX(-50%) scale(1.5); }
+            100% { bottom: 50px; opacity: 1; transform: translateX(-50%) scale(2.5); }
+        }
+
+        /* --- ポップアップ②（システム） --- */
+        #system-modal {
+            display: none;
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: #ffffff;
+            color: #333333;
+            padding: 40px;
+            border-radius: 4px;
+            box-shadow: 0 0 50px rgba(0,0,0,1);
+            z-index: 100000;
+            text-align: center;
+            width: 85%;
+            max-width: 450px;
+            font-family: sans-serif;
+        }
+
+        #system-modal h2 { color: #d32f2f; margin-top: 0; font-size: 1.2rem; }
+        #system-modal p { line-height: 1.8; font-weight: bold; }
+        .close-btn { 
+            margin-top: 20px; 
+            padding: 8px 20px; 
+            cursor: pointer;
+            background: #333; color: #fff; border: none;
+        }
+
+        /* 文字送り */
+        #typing-text span { opacity: 0; transition: opacity 0.1s; }
+        #typing-text span.visible { opacity: 1; }
+    </style>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>👁️ 観察記録</h1>
             <p>あなたのすべてを知っている</p>
-            
             <div class="search-container">
                 <form class="search-form" id="search-form">
-                    <input 
-                        type="text" 
-                        class="search-input" 
-                        id="search-input" 
-                        placeholder="あなたを探す... (2語まで対応)" 
-                        autocomplete="off"
-                    />
+                    <input type="text" class="search-input" id="search-input" placeholder="あなたを探す..." autocomplete="off" />
                     <button type="submit" class="search-button">🔍 追跡</button>
                 </form>
                 <div class="search-message" id="search-message"></div>
             </div>
         </header>
 
-        <!-- パンくずリスト -->
         <nav class="breadcrumb">
-            <a href="dark-blog.html">観察記録トップ</a>
+            <a href="dark-top.html">観察記録トップ</a>
             <span class="breadcrumb-separator">›</span>
             <span class="breadcrumb-current">待っていたよ</span>
         </nav>
 
-        <!-- 検索結果表示エリア（ここに挿入されます） -->
-        <div id="search-result-placeholder"></div>
-
-        <!-- 記事本文 -->
         <article class="article-detail">
             <div class="entry-date-header">
-                <div class="date-box">
-                    <div class="date-day">きみのもとへ</div>
-                </div>
+                <div class="date-box"><div class="date-day">きみのもとへ</div></div>
                 <div>
-                    <div class="date-info-group">
-                        <div class="date-label">投稿:</div>
-                        <div class="date-time">1分前</div>
-                    </div>
-                    <div class="date-info-group">
-                        <div class="date-label">最終更新:</div>
-                        <div class="date-time">1日前</div>
-                    </div>
+                    <div class="date-info-group"><div class="date-label">投稿:</div><div class="date-time">1分前</div></div>
+                    <div class="date-info-group"><div class="date-label">最終更新:</div><div class="date-time">1分前</div></div>
                 </div>
             </div>
             
             <div class="entry-content">
                 <h1 class="article-title">こんにちは愛する人</h1>
-                
                 <div class="article-body">
                     <p>
                         ここまで見てくれたんだね。<br>
                         さあ、お迎えにいくよ<br>
-                        少しだけ、ま っ て て ね
+                        <span id="typing-text">少しだけ、ま っ て て ね</span>
                     </p>
                 </div>
-                
             </div>
         </article>
 
-        <!-- トップに戻るボタン -->
         <div class="back-to-top">
             <a href="dark-top.html" class="back-button">← トップに戻る</a>
         </div>
-
     </div>
 
+    <div id="horror-overlay">
+        <div class="horror-text">今、君の後ろにいるよ</div>
+        <svg class="horror-hand" id="creeping-hand" viewBox="0 0 200 200">
+            <path d="M50,200 Q40,150 30,120 Q20,100 30,80 T50,60 T70,80 Q80,50 100,50 T120,80 Q130,40 150,45 T160,85 Q180,60 190,80 T170,120 L160,200 Z" />
+        </svg>
+    </div>
+
+    <div id="system-modal">
+        <h2>NOTICE</h2>
+        <p>クリアおめでとうございます！<br>エピローグを見るためには<br><span style="color:#d32f2f; font-size:1.4rem;">CLEAR</span><br>と検索してください。</p>
+        <button class="close-btn" onclick="document.getElementById('system-modal').style.display='none'">閉じる</button>
+    </div>
+
+    <script>
+        window.addEventListener('load', function() {
+            // --- 音源の設定 (砂嵐音) ---
+            const noise = new Audio('https://www.soundjay.com/misc/sounds/tv-static-01.mp3');
+            noise.loop = true;
+
+            const typingTarget = document.getElementById('typing-text');
+            const textContent = typingTarget.textContent;
+            typingTarget.textContent = '';
+
+            const charArray = [...textContent].map(char => {
+                const span = document.createElement('span');
+                span.textContent = char;
+                typingTarget.appendChild(span);
+                return span;
+            });
+
+            // 1. 2秒後にタイピング演出開始 (0.4秒間隔)
+            setTimeout(() => {
+                charArray.forEach((span, index) => {
+                    setTimeout(() => {
+                        span.classList.add('visible');
+                    }, index * 400);
+                });
+            }, 2000);
+
+            const horror = document.getElementById('horror-overlay');
+            const hand = document.getElementById('creeping-hand');
+            const system = document.getElementById('system-modal');
+
+            // 2. 7秒後にホラー演出開始
+            setTimeout(() => {
+                horror.style.display = 'block';
+                hand.classList.add('hand-attack'); // 手が迫りくる
+                
+                // 音を鳴らす (ブラウザの制限で無音の場合があります。画面を一度クリックしておくと確実です)
+                noise.play().catch(e => console.log("Audio play prevented"));
+
+                // 3. 5秒後に終了
+                setTimeout(() => {
+                    horror.style.display = 'none';
+                    noise.pause();
+                    system.style.display = 'block';
+                }, 5000);
+
+            }, 9000); 
+        });
+    </script>
     <script src="blog-js.js"></script>
+    <div><p style="color: white;">ページ 23/24</p></div>
 </body>
 </html>
