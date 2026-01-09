@@ -957,30 +957,28 @@ header p {
 
 
 @media (max-width: 768px) {
+    /* --- 既存のコードはそのまま --- */
 
-    .article-title {
-
-        font-size: 1.7rem;
-
+    header {
+        /* 上下の余白（40px）を 10px くらいまで削ります */
+        padding: 10px 0; 
+        /* 下の要素（検索窓）との間隔（60px）を半分に詰めます */
+        margin-bottom: 30px; 
     }
 
-
-
-    .article-body {
-
-        font-size: 1rem;
-
+    .main-visual {
+        /* スマホでは高さを固定せず、画像に合わせます */
+        height: auto; 
+        /* 外枠の下の余白（40px）を半分にします */
+        margin-bottom: 20px; 
+        /* 角丸が画像に反映されるように設定 */
+        overflow: hidden; 
     }
 
-
-
-    .related-grid {
-
-        grid-template-columns: 1fr;
-
+    .header-image {
+        /* 縦横比を維持して表示 */
+        height: auto; 
+        display: block;
     }
-
-   
-
 }
 
