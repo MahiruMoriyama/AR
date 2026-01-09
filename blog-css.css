@@ -1,3 +1,7 @@
+body {
+    /* 読み込んだ Noto Sans JP を最優先にする */
+    font-family: 'Noto Sans JP', sans-serif;
+} 
 .container {
 
     max-width: 800px;
